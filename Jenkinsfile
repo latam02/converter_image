@@ -1,18 +1,20 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('UnitTest') {
+      agent {
+        docker { image 'python:3.8-slim' }
+      }
       steps {
-        sh 'echo hello world'
+        sh 'ls -la'
+        sh 'pip --version'
       }
     }
-
-    stage('Unit test') {
-      steps {
-        sh '''python -m pytest ./convert_image/test/test_convert_image.py
-'''
-      }
-    }
+    //post {
+    //  always {
+    //    archiveArtifacts 'dir1/reports/html'
+    //  }
+    //}
 
   }
 }
