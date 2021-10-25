@@ -13,13 +13,13 @@ from pathlib import Path
 from unittest import TestCase
 from wand.image import Image
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 class TestImageConverter(TestCase):
     """Class to test functions of the library to convert images, using some effects or dimensions changes"""
+
     def test_convert_blur(self):
-        filepath = str(BASE_DIR) + '/resources_test/image_test/google.jpg'
+        filepath = str(BASE_DIR) + '/resources_test/google.jpg'
         with Image(filename=filepath) as img:
             blur_radius = 10
             blur_sigma = 10
@@ -29,7 +29,7 @@ class TestImageConverter(TestCase):
             self.assertEqual(current, expected)
 
     def test_convert_grayscale(self):
-        filepath = str(BASE_DIR) + '/resources_test/image_test/google.jpg'
+        filepath = str(BASE_DIR) + '/resources_test/google.jpg'
         with Image(filename=filepath) as img:
             img.type = 'grayscale'
             current = str(img)
@@ -37,7 +37,7 @@ class TestImageConverter(TestCase):
             self.assertEqual(current, expected)
 
     def test_convert_resize(self):
-        filepath = str(BASE_DIR) + '/resources_test/image_test/google.jpg'
+        filepath = str(BASE_DIR) + '/resources_test/google.jpg'
         with Image(filename=filepath) as img:
             width = 1000
             height = 500
@@ -47,7 +47,7 @@ class TestImageConverter(TestCase):
             self.assertEqual(current, expected)
 
     def test_convert_blur_grayscale_resize(self):
-        filepath = str(BASE_DIR) + '/resources_test/image_test/google.jpg'
+        filepath = str(BASE_DIR) + '/resources_test/google.jpg'
         with Image(filename=filepath) as img:
             blur_radius = 10
             blur_sigma = 10
