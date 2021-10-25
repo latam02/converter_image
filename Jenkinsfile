@@ -10,7 +10,9 @@ pipeline {
       }
       steps {
         withEnv(["HOME=${env.WORKSPCE}"]) {
+          sh 'ls -la'
           sh 'pip install --user -r requirements.txt'
+          sh 'python -m pytest -vv --cov=app .\\convert_image\\test'
         }
       }
     }
