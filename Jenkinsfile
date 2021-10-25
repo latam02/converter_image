@@ -4,7 +4,8 @@ pipeline {
     stage('UnitTest') {
       agent {
         docker {
-          image 'python:3.8.12'
+          image 'python:3.8.12',
+          image 'dpokidov/imagemagick'
         }
 
       }
