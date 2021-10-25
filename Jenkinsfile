@@ -16,6 +16,11 @@ pipeline {
         }
       }
     }
+    post {
+      always {
+        archiveArtifacts 'dir1/reports/html'
+      }
+    }
 
   }
 }
