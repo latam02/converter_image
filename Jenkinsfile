@@ -11,7 +11,7 @@ pipeline {
       steps {
         withEnv(["HOME=${env.WORKSPCE}"]) {
           sh 'ls -la'
-          sh 'sudo apt install imagemagick'
+          sh 'apt install imagemagick'
           sh 'pip install --user -r requirements.txt'
           sh 'python -m pytest ./convert_image/test/test_convert_image.py'
         }
