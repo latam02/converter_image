@@ -8,6 +8,7 @@ pipeline {
       steps {
         sh 'ls -la'
         sh 'pip --version'
+        sh 'python -m pytest ./convert_image/test/test_convert_image.py'
       }
     }
     //post {
