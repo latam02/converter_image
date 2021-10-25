@@ -9,7 +9,6 @@ pipeline {
 
       }
       steps {
-        sh 'whoami'
         sh 'pip -r install requirements.txt'
       }
     }
