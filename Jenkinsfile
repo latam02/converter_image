@@ -20,7 +20,7 @@ pipeline {
 
   post {
     always {
-      archiveArtifacts 'dir1/reports/html'
+      archiveArtifacts 'dir1/reports/report.html'
     }
   }
 }
