@@ -21,7 +21,7 @@ pipeline {
 
   post {
     always {
-      archiveArtifacts artifacts: 'report.html', followSymlinks: false
+      archiveArtifacts artifacts: '**', followSymlinks: false
     }
   }
 }
