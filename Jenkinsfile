@@ -20,7 +20,7 @@ pipeline {
 
   post {
     always {
-      archiveArtifacts artifacts: 'dir1/reports/report.html', followSymlinks: false
+      archiveArtifacts artifacts: '**/*.html', followSymlinks: false
     }
   }
 }
