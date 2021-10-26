@@ -21,7 +21,7 @@ pipeline {
 
   post {
     always {
-      junit 'build/reports/**/*.xml'
+      archiveArtifacts artifacts: 'report.html', followSymlinks: false
     }
   }
 }
