@@ -12,7 +12,7 @@ pipeline {
         withEnv(["HOME=${env.WORKSPCE}"]) {
           sh 'pip install --user -r requirements.txt'
           sh 'python -m pytest ./convert_image/test/test_convert_image.py'
-          sh 'pytest --html=report.html --self-contained-html'
+          sh 'python -m pytest --html=report.html --self-contained-html'
           sh 'ls -ls'
         }
       }
