@@ -11,7 +11,7 @@ pipeline {
       steps {
         withEnv(["HOME=${env.WORKSPCE}"]) {
           sh 'pip install --user -r requirements.txt'
-          // sh 'python -m pytest ./convert_image/test/test_convert_image.py > report.html'
+          sh 'python -m pytest ./convert_image/test/test_convert_image.py > report.html'
           sh 'echo new > report.html'
           sh 'ls -ls'
         }
@@ -21,7 +21,7 @@ pipeline {
 
   post {
     always {
-      archiveArtifacts artifacts: '**', followSymlinks: false
+      junit 'build/reports/**/*.xml'
     }
   }
 }
