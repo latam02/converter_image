@@ -10,9 +10,9 @@ pipeline {
       }
       steps {
         withEnv(["HOME=${env.WORKSPCE}"]) {
-          sh 'ls -la'
           sh 'pip install --user -r requirements.txt'
-          sh 'python -m pytest ./convert_image/test/test_convert_image.py'
+          sh 'python -m pytest ./convert_image/test/test_convert_image.py > report.html'
+          sh 'ls -ls'
         }
       }
     }
@@ -20,7 +20,7 @@ pipeline {
 
   post {
     always {
-      archiveArtifacts 'dir1/reports/report.html'
+      archiveArtifacts artifacts: 'dir1/reports/report.html', followSymlinks: false
     }
   }
 }
