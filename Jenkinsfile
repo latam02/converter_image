@@ -22,10 +22,10 @@ pipeline {
           archiveArtifacts artifacts: 'report.html', followSymlinks: false
         }
       }
-      stage('CodeQuality') {
-        steps {
-          sh "/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02ci   -Dsonar.projectKey=converterimage   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io"
-        }
+    }
+    stage('CodeQuality') {
+      steps {
+        sh "/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02ci   -Dsonar.projectKey=converterimage   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io"
       }
     }
   }
