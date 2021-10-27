@@ -9,7 +9,7 @@ pipeline {
       }
       steps {
         sh 'ls -la'
-        sh 'pip install --user -r CONVERTER_IMAGE/requirements.txt'
+        sh 'pip install --user -r requirements.txt'
         // sh 'python -m pytest --html=report.html --self-contained-html'
         dir('CONVERTER_IMAGE') {
           sh 'ls -la'
