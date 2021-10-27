@@ -8,9 +8,9 @@ pipeline {
         }
       }
       steps {
+        sh 'pip install --user -r CONVERTER_IMAGE/requirements.txt'
         // sh 'python -m pytest --html=report.html --self-contained-html'
         dir('CONVERTER_IMAGE') {
-          sh 'pip install --user -r requirements.txt'
           sh 'ls -la'
           sh 'python -m pytest -r ./convert_image/test/test_convert_image.py'
           sh 'python -m pytest --html=../../report.html -s'
