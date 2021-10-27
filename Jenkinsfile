@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    SONAR_TOKEN=credentials('sonar_token')
+  }
   stages {
     stage('UnitTest') {
       agent {
@@ -27,6 +30,11 @@ pipeline {
     stage('CodeQuality') {
       steps {
         sh "/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02ci   -Dsonar.projectKey=converterimage   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io"
+      }
+    }
+    stage('QualityGates') {
+      steps {
+        sh 'echo get the compute results: Failed/Passed for your scanned project'
       }
     }
   }
