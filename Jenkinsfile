@@ -9,6 +9,7 @@ pipeline {
       }
       steps {
         withEnv(["HOME=${env.WORKSPCE}"]) {
+          sh 'pip install --upgrade pip'
           sh 'pip install --user -r requirements.txt'
           // sh 'python -m pytest --html=report.html --self-contained-html'
           sh 'python -m pytest -r ./convert_image/test/test_convert_image.py'
