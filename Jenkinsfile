@@ -6,6 +6,7 @@ pipeline {
     DOCKER_PASSWORD=credentials('docker_password')
     IMAGE_NAME='convert_image'
     TAG_VERSION='1.0'
+  }
   stages {
     stage('UnitTest') {
       agent {
