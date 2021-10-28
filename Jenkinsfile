@@ -2,7 +2,10 @@ pipeline {
   agent any
   environment {
     SONAR_TOKEN=credentials('sonar_token')
-  }
+    DOCKER_USER='christc'
+    DOCKER_PASSWORD=credentials('docker_password')
+    IMAGE_NAME='convert_image'
+    TAG_VERSION='1.0'
   stages {
     stage('UnitTest') {
       agent {
@@ -35,6 +38,23 @@ pipeline {
     stage('QualityGates') {
       steps {
         sh 'echo get the compute results: Failed/Passed for your scanned project'
+      }
+    }
+    stage('Package'){
+      steps {
+        sh 'docker build -t ${IMAGE_NAME}:${TAG_VERSION} .'
+      }
+    }
+    stage('Publish'){
+      steps {
+        sh 'docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}'
+        sh 'docker tag ${IMAGE_NAME}:${TAG_VERSION} christc/${IMAGE_NAME}:${TAG_VERSION}'
+        sh 'docker push christc/${IMAGE_NAME}:${TAG_VERSION}'
+      }
+    }
+    stage('Deploy'){
+      steps {
+        sh 'echo deploy'
       }
     }
   }
