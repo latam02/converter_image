@@ -8,11 +8,13 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /src
 
-COPY requirements.txt .
+COPY ./requirements.txt .
 
-RUN pip install -r requeriments.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
 
 # Install application into container
 COPY . .
 
 EXPOSE 8095
+
+ENTRYPOINT ["python","./manage.py","runserver"]
