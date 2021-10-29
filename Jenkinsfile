@@ -59,6 +59,7 @@ pipeline {
     }
     stage('Deploy'){
       steps {
+        sh 'sudo apt-get install libmagickwand-dev'
         sh 'docker run christc/${IMAGE_NAME}:${TAG_VERSION}'
         sh 'docker container ls -a'
       }
