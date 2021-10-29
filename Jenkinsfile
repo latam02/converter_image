@@ -39,7 +39,7 @@ pipeline {
     stage('QualityGates') {
       steps {
         sh 'echo Quality Gates'
-      ]
+      }
     }
     stage('Package'){
       steps {
