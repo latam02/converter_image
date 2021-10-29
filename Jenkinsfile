@@ -37,11 +37,15 @@ pipeline {
       }
     }
     stage('QualityGates') {
-      steps {
-        timeout(time: 1, unit: 'HOURS') {
-          waitForQualityGate abortPipeline: true
+      "conditions": [
+        {
+            "errorThreshold": "1",
+            "metric": "new_code_smells",
+            "onLeakPeriod": true,
+            "operator": "GREATER_THAN",
+            "status": "OK",
+            "value": "1"
         }
-      }
     }
     stage('Package'){
       steps {
