@@ -12,9 +12,11 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
+RUN apt-get install libmagickwand-dev
+
 # Install application into container
 COPY . .
 
-EXPOSE 8095
+EXPOSE 8000
 
 ENTRYPOINT ["python","./manage.py","runserver"]
