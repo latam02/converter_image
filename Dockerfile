@@ -12,7 +12,7 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-RUN apt-get install libmagickwand-dev
+RUN apt install imagemagick
 
 # Install application into container
 COPY . .
