@@ -46,6 +46,7 @@ pipeline {
             "status": "OK",
             "value": "1"
         }
+      ]
     }
     stage('Package'){
       steps {
