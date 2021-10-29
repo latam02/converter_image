@@ -37,8 +37,8 @@ pipeline {
       }
     }
     stage('QualityGates') {
-      "conditions": [
-        {
+      steps {
+        timeout(time: 1, unit: 'HOURS') {
             "errorThreshold": "1",
             "metric": "new_code_smells",
             "onLeakPeriod": true,
