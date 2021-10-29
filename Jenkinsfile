@@ -18,7 +18,7 @@ pipeline {
         withEnv(["HOME=${env.WORKSPCE}"]) {
           sh 'pip install --upgrade pip'
           sh 'pip install --user -r requirements.txt'
-          sh 'apt-get install libmagickwand-dev'
+          // sh 'apt-get install libmagickwand-dev'
           // sh 'python -m pytest --html=report.html --self-contained-html'
           sh 'python -m pytest -r ./convert_image/test/test_convert_image.py'
           sh 'python -m pytest --html=./report.html -s'
@@ -60,8 +60,7 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh 'docker run christc/${IMAGE_NAME}:${TAG_VERSION}'
-        sh 'docker container ls -a'
+        sh 'docker-compose run ${IMAGE_NAME}:${TAG_VERSION}'
       }
     }
   }
