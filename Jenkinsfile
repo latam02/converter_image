@@ -59,7 +59,8 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh 'echo deploy'
+        sh 'docker run christc/${IMAGE_NAME}:${TAG_VERSION}'
+        sh 'docker container ls -a'
       }
     }
   }
