@@ -12,11 +12,12 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-RUN apk add install imagemagick
+# RUN apt install imagemagick
 
 # Install application into container
 COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT ["python","./manage.py","runserver"]
+# ENTRYPOINT ["python","./manage.py","runserver"]
+ENTRYPOINT ["echo","/dev/null"]
