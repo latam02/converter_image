@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
-  test:
-    group: defaultGroup
+  convert_image:
+    group: latam02
     label_template: ${COUNT}
     lock_behavior: none
     display_order: -1
@@ -14,7 +14,7 @@ pipelines:
         branch: ct-jenkins
         encrypted_password: AES:xgnGplfgVKlxsLKvKWc7ng==:AVcoKefYW/cEUCF3Jkx04+29DNVMhmlHChuz3GizhIE=
     stages:
-    - step1:
+    - unitTest:
         fetch_materials: true
         keep_artifacts: false
         clean_workspace: false
@@ -22,12 +22,14 @@ pipelines:
           type: success
           allow_only_on_success: false
         jobs:
-          hi:
+          unit:
+            resources:
+              - ubuntu
             timeout: 0
             tasks:
             - exec:
                 arguments:
-                - Hello
-                - world
-                command: echo
+                - -c
+                - pip install -r requirements.txt
+                command: bash
                 run_if: passed
