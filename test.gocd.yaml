@@ -1,0 +1,33 @@
+format_version: 10
+pipelines:
+  test:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git-ec62e6d:
+        git: https://github.com/latam02/converter_image.git
+        username: ChristianTC
+        shallow_clone: false
+        auto_update: true
+        branch: ct-jenkins
+        encrypted_password: AES:xgnGplfgVKlxsLKvKWc7ng==:AVcoKefYW/cEUCF3Jkx04+29DNVMhmlHChuz3GizhIE=
+    stages:
+    - step1:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          hi:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - Hello
+                - world
+                command: echo
+                run_if: passed
