@@ -60,7 +60,7 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh 'docker run ${IMAGE_NAME}:${TAG_VERSION}'
+        sh 'docker run -d -p 8095:8000 christc/${IMAGE_NAME}:${TAG_VERSION}'
       }
     }
   }

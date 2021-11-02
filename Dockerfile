@@ -17,7 +17,7 @@ RUN apt update && apt install imagemagick -y
 # Install application into container
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8095
 
-# ENTRYPOINT ["python","./manage.py","runserver"]
-ENTRYPOINT ["echo","/dev/null"]
+ENTRYPOINT ["python","./manage.py","runserver", "0.0.0.0:8000"]
+# ENTRYPOINT ["echo","/dev/null"]
