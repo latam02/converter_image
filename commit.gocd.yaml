@@ -32,3 +32,9 @@ pipelines:
                 - pip install -r requirements.txt
                 command: bash
                 run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - python3 -m pytest --html=report.html -s
+                command: bash
+                run_if: passed
