@@ -54,7 +54,7 @@ pipelines:
                 - /home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner    -Dsonar.organization=latam02ci   -Dsonar.projectKey=converterimage   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io
                 command: bash
                 run_if: passed
-    -Publish:
+    - Publish:
       fetch_materials: true
       jobs:
         unit:
