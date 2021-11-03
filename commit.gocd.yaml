@@ -1,10 +1,15 @@
 format_version: 10
 pipelines:
   convert_image:
-    group: latam02
+    group: latam02-convert_image
     label_template: ${COUNT}
     lock_behavior: none
     display_order: -1
+    environment_variables:
+      IMAGE_NAME: 'convert_image'
+      TAG_VERSION: '1.0'
+    secure_variables:
+      SONAR_TOKEN: AES:JSIhvtmvd+rpG8ZFZdmQMA==:7xDBtyTgYlvave645W5fU2kz+2S2MR4Bsccx/aKt5fh+NejOi8DUwYrWsCruQF9r
     materials:
       git-ec62e6d:
         git: https://github.com/latam02/converter_image.git
@@ -16,11 +21,6 @@ pipelines:
     stages:
     - unitTest:
         fetch_materials: true
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-          allow_only_on_success: false
         jobs:
           unit:
             resources:
