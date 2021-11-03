@@ -55,11 +55,11 @@ pipelines:
                 command: bash
                 run_if: passed
     - Publish:
-      fetch_materials: true
-      jobs:
-        unit:
-          resources:
-            - docker
+        fetch_materials: true
+        jobs:
+          publish:
+            resources:
+              - docker
             timeout: 0
             tasks:
             - exec:
