@@ -40,6 +40,9 @@ pipelines:
                 - python3 -m pytest --html=report.html -s
                 command: bash
                 run_if: passed
+            artifacts:
+              - build:
+                  source: ./report.html
     - CodeQuality:
         fetch_materials: true
         jobs:
