@@ -38,3 +38,17 @@ pipelines:
                 - python3 -m pytest --html=report.html -s
                 command: bash
                 run_if: passed
+    - CodeQuality:
+        fetch_materials: true
+        jobs:
+          require:
+            resources:
+              - centos
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - /home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io
+                command: bash
+                run_if: passed
