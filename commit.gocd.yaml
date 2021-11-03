@@ -1,0 +1,34 @@
+format_version: 10
+pipelines:
+  convert_image:
+    group: latam02-convert_image
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    environment_variables:
+      IMAGE_NAME: 'convert_image'
+      TAG_VERSION: '1.0'
+    secure_variables:
+      SONAR_TOKEN: AES:hItI8dWs7lj4T8LjNVVqrQ==:KSRrJeiPv8tij3h9cPDH8UGRpvB0FOyVseUJhj2+VzgrZxQF9/G1iUt1vKffgBMB
+    materials:
+      git-ec62e6d:
+        git: https://github.com/latam02/converter_image.git
+        username: ChristianTC
+        shallow_clone: false
+        auto_update: true
+        branch: ct-jenkins
+    stages:
+    - unitTest:
+        fetch_materials: true
+        jobs:
+          unit:
+            resources:
+              - ubuntu
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - pip install -r requirements.txt
+                command: bash
+                run_if: passed
