@@ -89,6 +89,3 @@ pipelines:
                 - docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}
                 command: bash
                 run_if: passed
-            artifacts:
-              - build:
-                  source: requirements.txt

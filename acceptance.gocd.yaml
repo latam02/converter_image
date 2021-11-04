@@ -15,7 +15,7 @@ pipelines:
         stage: Publish
         
     stages:
-    - unitTest:
+    - Deploy:
         fetch_materials: true
         jobs:
           unit:
@@ -30,7 +30,7 @@ pipelines:
                 command: bash
                 run_if: passed
 
-    - CodeQuality:
+    - acceptanceTest:
         fetch_materials: true
         jobs:
           require:
