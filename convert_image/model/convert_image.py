@@ -128,7 +128,7 @@ class ConvertImage:
             date = datetime.datetime.now()
             date = date.strftime("%Y%m%d%H%M%S")
             filename = f"media/{date}.jpg"
-            final_path = f"./../CONVERTER_IMAGE/{filename}"
+            final_path = f"./../src/{filename}"
             self.set_final_path(filename)
             # Save image
             img.save(filename=final_path)

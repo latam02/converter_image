@@ -8,8 +8,10 @@ pipelines:
     environment_variables:
       IMAGE_NAME: 'convert_image'
       TAG_VERSION: '1.0'
+      DOCKER_USER: 'christc'
     secure_variables:
       SONAR_TOKEN: AES:hItI8dWs7lj4T8LjNVVqrQ==:KSRrJeiPv8tij3h9cPDH8UGRpvB0FOyVseUJhj2+VzgrZxQF9/G1iUt1vKffgBMB
+      DOCKER_PASSWORD: AES:XX6dLzGV+va+B5Zd+x9maw==:Km41xkrESgXmFCFp8xBUrm3C4MF5lvqZG1ops0pbrzU=
     materials:
       git-ec62e6d:
         git: https://github.com/latam02/converter_image.git
@@ -38,6 +40,9 @@ pipelines:
                 - python3 -m pytest --html=report.html -s
                 command: bash
                 run_if: passed
+            artifacts:
+              - build:
+                  source: report.html
     - CodeQuality:
         fetch_materials: true
         jobs:
@@ -50,5 +55,37 @@ pipelines:
                 arguments:
                 - -c
                 - /home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner    -Dsonar.organization=latam02ci   -Dsonar.projectKey=converterimage   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io
+                command: bash
+                run_if: passed
+    - Publish:
+        fetch_materials: true
+        jobs:
+          publish:
+            resources:
+              - docker
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - docker build -t ${IMAGE_NAME}:${TAG_VERSION} .
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}
                 command: bash
                 run_if: passed

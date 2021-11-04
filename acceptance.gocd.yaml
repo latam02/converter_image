@@ -1,0 +1,46 @@
+format_version: 10
+pipelines:
+  convert_image_acceptance:
+    group: latam02-convert_image
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    environment_variables:
+      IMAGE_NAME: 'convert_image'
+      TAG_VERSION: '1.0'
+      DOCKER_USER: 'christc'
+    materials:
+      convert_image:
+        pipeline: convert_image
+        stage: Publish
+        
+    stages:
+    - Deploy:
+        fetch_materials: true
+        jobs:
+          unit:
+            resources:
+              - docker
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - docker run -d -p 8095:8000 christc/${IMAGE_NAME}:${TAG_VERSION}
+                command: bash
+                run_if: passed
+
+    - acceptanceTest:
+        fetch_materials: true
+        jobs:
+          require:
+            resources:
+              - centos
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - echo run acceptance tests
+                command: bash
+                run_if: passed
