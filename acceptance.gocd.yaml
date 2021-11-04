@@ -10,12 +10,10 @@ pipelines:
       TAG_VERSION: '1.0'
       DOCKER_USER: 'christc'
     materials:
-      git-ec62e6d:
-        git: https://github.com/latam02/converter_image.git
-        username: ChristianTC
-        shallow_clone: false
-        auto_update: true
-        branch: ct-jenkins
+      convert_image:
+        pipeline: convert_image
+        stage: Publish
+        
     stages:
     - unitTest:
         fetch_materials: true
