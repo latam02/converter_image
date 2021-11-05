@@ -26,7 +26,13 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - docker run -d -p 8095:8000 christc/${IMAGE_NAME}:${TAG_VERSION}
+                - docker stop convert_image || true && docker rm convert_image || true
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker run --name convert_image -d -p 8095:8000 christc/${IMAGE_NAME}:${TAG_VERSION}
                 command: bash
                 run_if: passed
 
